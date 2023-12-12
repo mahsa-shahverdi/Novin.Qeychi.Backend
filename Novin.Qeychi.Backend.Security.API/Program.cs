@@ -1,9 +1,16 @@
+using Microsoft.EntityFrameworkCore;
+using Novin.Qeychi.Backend.Infrastructure.Database;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddDbContext<QeychiDB>(options=>
+{
+    options.UseSqlServer("Server=(Localdb)\\MSSQLLocalDB;Database=QeychiDB;Trusted_Connection=True");
+});
 
 var app = builder.Build();
 
