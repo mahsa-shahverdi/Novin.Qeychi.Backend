@@ -68,16 +68,8 @@ namespace Novin.Qeychi.Backend.Infrastructure.Migrations
                     b.Property<int>("BeautySalonId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Day")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("StylistId")
                         .HasColumnType("int");
-
-                    b.Property<string>("Time")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

@@ -12,8 +12,8 @@ using Novin.Qeychi.Backend.Infrastructure.Database;
 namespace Novin.Qeychi.Backend.Infrastructure.Migrations
 {
     [DbContext(typeof(QeychiDB))]
-    [Migration("20231214111827_Second")]
-    partial class Second
+    [Migration("20231214123435_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -71,16 +71,8 @@ namespace Novin.Qeychi.Backend.Infrastructure.Migrations
                     b.Property<int>("BeautySalonId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Day")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("StylistId")
                         .HasColumnType("int");
-
-                    b.Property<string>("Time")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
