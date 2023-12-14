@@ -45,6 +45,9 @@ namespace Novin.Qeychi.Backend.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<decimal>("Rating")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -54,7 +57,75 @@ namespace Novin.Qeychi.Backend.Infrastructure.Migrations
                     b.ToTable("BeautySalons");
                 });
 
-            modelBuilder.Entity("Novin.Qeychi.Backend.Core.Entities.Confirmation", b =>
+            modelBuilder.Entity("Novin.Qeychi.Backend.Core.Entities.ConfirmationEmployment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("BeautySalonId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StylistId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BeautySalonId");
+
+                    b.HasIndex("StylistId");
+
+                    b.ToTable("ConfirmationEmployments");
+                });
+
+            modelBuilder.Entity("Novin.Qeychi.Backend.Core.Entities.ConfirmationTurn", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("BeautySalonId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DateAndTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Deposit")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsCancel")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsPay")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("OndemandService")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("StylistId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BeautySalonId");
+
+                    b.HasIndex("CustomerId");
+
+                    b.HasIndex("StylistId");
+
+                    b.ToTable("ConfirmationTurns");
+                });
+
+            modelBuilder.Entity("Novin.Qeychi.Backend.Core.Entities.ConfirmationWorkspace", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -88,6 +159,7 @@ namespace Novin.Qeychi.Backend.Infrastructure.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("LinkOfExclusivePanel")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -96,7 +168,7 @@ namespace Novin.Qeychi.Backend.Infrastructure.Migrations
 
                     b.HasIndex("EntrepreneurId");
 
-                    b.ToTable("Confirmations");
+                    b.ToTable("ConfirmationWorkspaces");
                 });
 
             modelBuilder.Entity("Novin.Qeychi.Backend.Core.Entities.Customer", b =>
@@ -176,6 +248,10 @@ namespace Novin.Qeychi.Backend.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("MobileNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -217,57 +293,15 @@ namespace Novin.Qeychi.Backend.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<decimal>("Rating")
+                        .HasColumnType("decimal(18,2)");
+
                     b.HasKey("Id");
 
                     b.ToTable("Stylists");
                 });
 
-            modelBuilder.Entity("Novin.Qeychi.Backend.Core.Entities.Turn", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("BeautySalonId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("DateAndTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Deposit")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsCancel")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsPaid")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("OndemandService")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("StylistId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BeautySalonId");
-
-                    b.HasIndex("CustomerId");
-
-                    b.HasIndex("StylistId");
-
-                    b.ToTable("Turns");
-                });
-
-            modelBuilder.Entity("Novin.Qeychi.Backend.Core.Entities.Confirmation", b =>
+            modelBuilder.Entity("Novin.Qeychi.Backend.Core.Entities.ConfirmationEmployment", b =>
                 {
                     b.HasOne("Novin.Qeychi.Backend.Core.Entities.BeautySalon", "BeautySalon")
                         .WithMany()
@@ -275,18 +309,18 @@ namespace Novin.Qeychi.Backend.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Novin.Qeychi.Backend.Core.Entities.Entrepreneur", "Entrepreneur")
+                    b.HasOne("Novin.Qeychi.Backend.Core.Entities.Stylist", "Stylist")
                         .WithMany()
-                        .HasForeignKey("EntrepreneurId")
+                        .HasForeignKey("StylistId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("BeautySalon");
 
-                    b.Navigation("Entrepreneur");
+                    b.Navigation("Stylist");
                 });
 
-            modelBuilder.Entity("Novin.Qeychi.Backend.Core.Entities.Turn", b =>
+            modelBuilder.Entity("Novin.Qeychi.Backend.Core.Entities.ConfirmationTurn", b =>
                 {
                     b.HasOne("Novin.Qeychi.Backend.Core.Entities.BeautySalon", "BeautySalon")
                         .WithMany()
@@ -311,6 +345,25 @@ namespace Novin.Qeychi.Backend.Infrastructure.Migrations
                     b.Navigation("Customer");
 
                     b.Navigation("Stylist");
+                });
+
+            modelBuilder.Entity("Novin.Qeychi.Backend.Core.Entities.ConfirmationWorkspace", b =>
+                {
+                    b.HasOne("Novin.Qeychi.Backend.Core.Entities.BeautySalon", "BeautySalon")
+                        .WithMany()
+                        .HasForeignKey("BeautySalonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Novin.Qeychi.Backend.Core.Entities.Entrepreneur", "Entrepreneur")
+                        .WithMany()
+                        .HasForeignKey("EntrepreneurId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("BeautySalon");
+
+                    b.Navigation("Entrepreneur");
                 });
 #pragma warning restore 612, 618
         }

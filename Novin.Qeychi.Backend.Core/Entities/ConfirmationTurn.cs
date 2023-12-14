@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Novin.Qeychi.Backend.Core.Entities
 {
-    public class Turn : Thing
+    public class ConfirmationTurn : Thing
     {
         public required Customer Customer { get; set; }
         public required BeautySalon BeautySalon { get; set; }
@@ -14,7 +14,7 @@ namespace Novin.Qeychi.Backend.Core.Entities
         public required DateTime DateAndTime { get; set; }
         public required string OndemandService { get; set; }
         public required string Deposit { get; set; }
-        public required bool IsPaid { get; set; }
+        public required bool IsPay { get; set; }
         public required bool IsCancel {  get; set; }
 
     }

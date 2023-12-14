@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Novin.Qeychi.Backend.Core.Entities
 {
-    public class Stylist : User
+    public class ConfirmationEmployment : Thing
     {
-        public required string Profession { get; set; }
-        public required decimal Rating { get; set; }
+        public required BeautySalon BeautySalon { get; set; }
+        public required Stylist Stylist { get; set; }
     }
 }

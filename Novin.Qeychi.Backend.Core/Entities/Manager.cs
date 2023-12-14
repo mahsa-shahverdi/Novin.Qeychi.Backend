@@ -9,5 +9,6 @@ namespace Novin.Qeychi.Backend.Core.Entities
     public class Manager : User
     {
         public required string Password { get; set; }
+        public required string Email { get; set; }
     }
 }

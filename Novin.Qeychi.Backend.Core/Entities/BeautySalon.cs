@@ -13,5 +13,6 @@ namespace Novin.Qeychi.Backend.Core.Entities
         public required string Address { get; set; }
         public required string PhoneNumber { get; set; }
         public required bool IsActive { get; set; }
+        public required decimal Rating { get; set; }
     }
 }
