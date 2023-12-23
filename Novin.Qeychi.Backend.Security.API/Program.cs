@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
+using Novin.Qeychi.Backend.Core.Entities;
 using Novin.Qeychi.Backend.Infrastructure.Database;
+using Novin.Qeychi.Backend.Security.API.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,29 +25,38 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-var summaries = new[]
+app.MapPost("/adminLogin", (QeychiDB db, AdminLoginRequestDTO adminLogin ) =>
 {
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
-
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast = Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast")
-.WithOpenApi();
+    if (!db.Managers.Any())
+    {
+        var firstAdmin = new Manager
+        {
+            MobileNumber = "09123456789",
+            Name = "admin",
+            AccessLevel = "management",
+            Password = "admin",
+            Email = "admin@gmail.com",
+        };
+        db.Managers.Add(firstAdmin);
+        db.SaveChanges();
+    }
+    var result=db.Managers
+    .Where(m=> m.MobileNumber==adminLogin.Username && m.Password==adminLogin.Password)
+    .FirstOrDefault();
+    if (result!=null)
+    {
+        return new
+        {
+            IsOk = true,
+            Message="wellcome"
+        };
+    }
+    return new
+    {
+        IsOk = false,
+        Message = "not found"
+    };
+});
 
 app.Run();
 
-internal record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
