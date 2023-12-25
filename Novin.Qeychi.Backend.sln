@@ -11,9 +11,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2-Infrastructure", "2-Infra
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3-App", "3-App", "{86E87EC5-2BD0-4ACC-97C3-DF0785E4F2EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Novin.Qeychi.Backend.Core", "Novin.Qeychi.Backend.Core\Novin.Qeychi.Backend.Core.csproj", "{D7FED41A-616F-441D-8BFE-F1307B3F9310}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Novin.Qeychi.Backend.Core", "Novin.Qeychi.Backend.Core\Novin.Qeychi.Backend.Core.csproj", "{D7FED41A-616F-441D-8BFE-F1307B3F9310}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Novin.Qeychi.Backend.Infrastructure", "Novin.Qeychi.Backend.Infrastructure\Novin.Qeychi.Backend.Infrastructure.csproj", "{8E45C0B7-C537-4011-A503-C4A0F91A6C40}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Novin.Qeychi.Backend.Infrastructure", "Novin.Qeychi.Backend.Infrastructure\Novin.Qeychi.Backend.Infrastructure.csproj", "{8E45C0B7-C537-4011-A503-C4A0F91A6C40}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Novin.Qeychi.Backend.API.Infrastructure", "Novin.Qeychi.Backend.API.Infrastructure\Novin.Qeychi.Backend.API.Infrastructure.csproj", "{F6607378-B500-442C-90B9-C8AC0FB2FF58}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Novin.Qeychi.Backend.PublicUser.API", "Novin.Qeychi.Backend.PublicUser.API\Novin.Qeychi.Backend.PublicUser.API.csproj", "{D473B042-5E6A-4184-B7D6-6573EA9873B5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +37,14 @@ Global
 		{8E45C0B7-C537-4011-A503-C4A0F91A6C40}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E45C0B7-C537-4011-A503-C4A0F91A6C40}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8E45C0B7-C537-4011-A503-C4A0F91A6C40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6607378-B500-442C-90B9-C8AC0FB2FF58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6607378-B500-442C-90B9-C8AC0FB2FF58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6607378-B500-442C-90B9-C8AC0FB2FF58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6607378-B500-442C-90B9-C8AC0FB2FF58}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D473B042-5E6A-4184-B7D6-6573EA9873B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D473B042-5E6A-4184-B7D6-6573EA9873B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D473B042-5E6A-4184-B7D6-6573EA9873B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D473B042-5E6A-4184-B7D6-6573EA9873B5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -41,6 +53,8 @@ Global
 		{C33D6A85-6D2E-4F75-BD55-845C6F909B73} = {86E87EC5-2BD0-4ACC-97C3-DF0785E4F2EA}
 		{D7FED41A-616F-441D-8BFE-F1307B3F9310} = {99F3F161-31A1-4196-84FC-C7AEDE17DFE4}
 		{8E45C0B7-C537-4011-A503-C4A0F91A6C40} = {85E2FB58-0A68-4C36-8070-BB25357807BE}
+		{F6607378-B500-442C-90B9-C8AC0FB2FF58} = {85E2FB58-0A68-4C36-8070-BB25357807BE}
+		{D473B042-5E6A-4184-B7D6-6573EA9873B5} = {86E87EC5-2BD0-4ACC-97C3-DF0785E4F2EA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DFD6260E-F859-4F09-97E2-E75432E18955}
