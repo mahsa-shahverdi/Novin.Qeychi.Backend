@@ -1,7 +1,11 @@
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Novin.Qeychi.Backend.Core.Entities;
 using Novin.Qeychi.Backend.Infrastructure.Database;
 using Novin.Qeychi.Backend.Security.API.Models;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -45,16 +49,33 @@ app.MapPost("/adminLogin", (QeychiDB db, AdminLoginRequestDTO adminLogin ) =>
     .FirstOrDefault();
     if (result!=null)
     {
+        var claims = new[]
+        {
+            new Claim("Username",result.MobileNumber.ToString()),
+            new Claim("Name",result.Name.ToString()),
+            new Claim("AccessLevel", result.AccessLevel.ToString())
+        };
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"] ?? ""));
+        var signIn=new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+        var token = new JwtSecurityToken(
+            builder.Configuration["Jwt:Issuer"],
+            builder.Configuration["Jwt:Audience"],
+            claims,
+            expires: DateTime.UtcNow.AddDays(1),
+            signingCredentials: signIn);
+
         return new
         {
             IsOk = true,
-            Message="wellcome"
+            Message=result.AccessLevel,
+            Token=new JwtSecurityTokenHandler().WriteToken(token)
         };
     }
     return new
     {
         IsOk = false,
-        Message = "not found"
+        Message = "کاربر مورد نظر یافت نشد.",
+        Token=""
     };
 });
 
