@@ -64,15 +64,10 @@ app.MapPost("/adminLogin", (QeychiDB db, AdminLoginRequestDTO adminLogin ) =>
     };
 });
 
-app.MapPost("/adminList", (QeychiDB db, ClaimsPrincipal user) =>
+app.MapPost("/publicLogin", (QeychiDB db) =>
 {
-    var result=user.Claims.FirstOrDefault(c=>c.Type=="AccessLevel")?.Value;
-    if (result == "management")
-    {
-        return db.Managers.ToList();
-    }
-    return null;
-}).RequireAuthorization();
+
+});
 
 app.Run();
 

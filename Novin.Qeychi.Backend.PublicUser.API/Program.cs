@@ -6,9 +6,9 @@ AppConfiguration.AddServices(builder);
 var app = builder.Build();
 AppConfiguration.UseServices(app);
 
-app.MapPost("/publicLogin", (QeychiDB db) =>
+app.MapPost("/BeautySalonList", (QeychiDB db) =>
 {
-    return db.Customers.ToList();
+    return db.BeautySalons.ToList();
 });
 
 app.Run();

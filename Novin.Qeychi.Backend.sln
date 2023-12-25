@@ -15,9 +15,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Novin.Qeychi.Backend.Core",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Novin.Qeychi.Backend.Infrastructure", "Novin.Qeychi.Backend.Infrastructure\Novin.Qeychi.Backend.Infrastructure.csproj", "{8E45C0B7-C537-4011-A503-C4A0F91A6C40}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Novin.Qeychi.Backend.API.Infrastructure", "Novin.Qeychi.Backend.API.Infrastructure\Novin.Qeychi.Backend.API.Infrastructure.csproj", "{F6607378-B500-442C-90B9-C8AC0FB2FF58}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Novin.Qeychi.Backend.API.Infrastructure", "Novin.Qeychi.Backend.API.Infrastructure\Novin.Qeychi.Backend.API.Infrastructure.csproj", "{F6607378-B500-442C-90B9-C8AC0FB2FF58}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Novin.Qeychi.Backend.PublicUser.API", "Novin.Qeychi.Backend.PublicUser.API\Novin.Qeychi.Backend.PublicUser.API.csproj", "{D473B042-5E6A-4184-B7D6-6573EA9873B5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Novin.Qeychi.Backend.PublicUser.API", "Novin.Qeychi.Backend.PublicUser.API\Novin.Qeychi.Backend.PublicUser.API.csproj", "{D473B042-5E6A-4184-B7D6-6573EA9873B5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Novin.Qeychi.Backend.Admin.API", "Novin.Qeychi.Backend.Admin.API\Novin.Qeychi.Backend.Admin.API.csproj", "{A74B2236-6AB4-4138-B841-6A9D185576EC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{D473B042-5E6A-4184-B7D6-6573EA9873B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D473B042-5E6A-4184-B7D6-6573EA9873B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D473B042-5E6A-4184-B7D6-6573EA9873B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A74B2236-6AB4-4138-B841-6A9D185576EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A74B2236-6AB4-4138-B841-6A9D185576EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A74B2236-6AB4-4138-B841-6A9D185576EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A74B2236-6AB4-4138-B841-6A9D185576EC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -55,6 +61,7 @@ Global
 		{8E45C0B7-C537-4011-A503-C4A0F91A6C40} = {85E2FB58-0A68-4C36-8070-BB25357807BE}
 		{F6607378-B500-442C-90B9-C8AC0FB2FF58} = {85E2FB58-0A68-4C36-8070-BB25357807BE}
 		{D473B042-5E6A-4184-B7D6-6573EA9873B5} = {86E87EC5-2BD0-4ACC-97C3-DF0785E4F2EA}
+		{A74B2236-6AB4-4138-B841-6A9D185576EC} = {86E87EC5-2BD0-4ACC-97C3-DF0785E4F2EA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DFD6260E-F859-4F09-97E2-E75432E18955}
