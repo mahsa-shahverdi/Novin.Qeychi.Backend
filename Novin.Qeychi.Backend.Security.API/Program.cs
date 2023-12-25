@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Novin.Qeychi.Backend.Core.Entities;
 using Novin.Qeychi.Backend.Infrastructure.Database;
@@ -17,6 +18,20 @@ builder.Services.AddDbContext<QeychiDB>(options=>
 });
 builder.Services.AddCors(options =>
 options.AddDefaultPolicy(builder=> builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+{
+    options.RequireHttpsMetadata = false;
+    options.SaveToken = false;
+    options.TokenValidationParameters = new TokenValidationParameters()
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidAudience = builder.Configuration["Jwt:Audience"],
+        ValidIssuer = builder.Configuration["Jwt:Issuer"],
+        IssuerSigningKey=new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"] ?? ""))
+    };
+});
+builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
@@ -28,6 +43,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseCors();
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapPost("/adminLogin", (QeychiDB db, AdminLoginRequestDTO adminLogin ) =>
 {
@@ -78,6 +95,16 @@ app.MapPost("/adminLogin", (QeychiDB db, AdminLoginRequestDTO adminLogin ) =>
         Token=""
     };
 });
+
+app.MapPost("/adminList", (QeychiDB db, ClaimsPrincipal user) =>
+{
+    var result=user.Claims.FirstOrDefault(c=>c.Type=="AccessLevel")?.Value;
+    if (result == "management")
+    {
+        return db.Managers.ToList();
+    }
+    return null;
+}).RequireAuthorization();
 
 app.Run();
 
