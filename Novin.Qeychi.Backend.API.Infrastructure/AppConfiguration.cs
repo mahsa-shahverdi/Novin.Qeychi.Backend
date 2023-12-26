@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -53,6 +55,18 @@ namespace Novin.Qeychi.Backend.API.Infrastructure
             app.UseCors();
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseExceptionHandler(app =>
+            app.Run(async context =>
+            {
+                var exception = context.Features
+                .Get<IExceptionHandlerPathFeature>().Error;
+                var response = new
+                {
+                    errorMessage = exception.Message,
+                };
+                await context.Response.WriteAsJsonAsync(response);
+            }));
         }
     }
 }

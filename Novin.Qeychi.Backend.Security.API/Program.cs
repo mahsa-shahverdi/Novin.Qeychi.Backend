@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Novin.Qeychi.Backend.API.Infrastructure;
 using Novin.Qeychi.Backend.Core.Entities;
+using Novin.Qeychi.Backend.Core.Exceptions;
 using Novin.Qeychi.Backend.Infrastructure.Database;
 using Novin.Qeychi.Backend.Security.API.Models;
 using System.IdentityModel.Tokens.Jwt;
@@ -16,6 +17,14 @@ AppConfiguration.UseServices(app);
 
 app.MapPost("/adminLogin", (QeychiDB db, AdminLoginRequestDTO adminLogin ) =>
 {
+    if (adminLogin.Username?.Trim().IsNullOrEmpty()??true)
+    {
+        throw new InvalidUsernameException();
+    }
+    if (adminLogin.Password?.Trim().IsNullOrEmpty() ?? true)
+    {
+        throw new InvalidPasswordException();
+    }
     if (!db.Managers.Any())
     {
         var firstAdmin = new Manager
